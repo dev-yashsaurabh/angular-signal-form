@@ -1,2 +1,2 @@
-# angular-signal-form
+# Angular-signal-form
 Angular 21 signal form
