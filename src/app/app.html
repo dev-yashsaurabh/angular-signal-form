@@ -24,12 +24,29 @@
   <form class="login-form" (submit)="onSubmit($event)">
       <mat-label>Email</mat-label>
       <input matInput type="email" [field]="loginForm.email" />
+      @if(loginForm.email().touched() && loginForm.email().invalid()){
+        @for(error of loginForm.email().errors(); track error) {
+          <p>{{error.message}}</p>
+        }
+      }
 
       <mat-label>Password</mat-label>
       <input matInput type="password" [field]="loginForm.password" />
-
+      @if(loginForm.password().touched() && loginForm.password().invalid()){
+        @for(error of loginForm.password().errors(); track error) {
+          <p>{{error.message}}</p>
+        }
+      }
+      
       <mat-label>Address</mat-label>
       <input matInput [field]="loginForm.address" />
+      @if(loginForm.address().touched() && loginForm.address().invalid()){
+        @for(error of loginForm.address().errors(); track error) {
+          <p>{{error.message}}</p>
+        }
+      }
+
+      <button matButton="filled" type="submit" >Submit</button>
   </form>
 
   <div>

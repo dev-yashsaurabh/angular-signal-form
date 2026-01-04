@@ -2,7 +2,7 @@ import { Component, signal } from '@angular/core';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatToolbarModule} from '@angular/material/toolbar';
-import { form, Field } from '@angular/forms/signals';
+import { form, Field, required, email, min, minLength } from '@angular/forms/signals';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { CommonModule } from '@angular/common';
 
@@ -28,7 +28,13 @@ export class App {
     address: ''
   });
   
-  loginForm = form(this.loginFormModel);
+  loginForm = form(this.loginFormModel, (schema) => {
+    required(schema.email, {message: "Email is required"});
+    email(schema.email, {message: "Email is not valid!"});
+    minLength(schema.password, 6, {message: "Minimum length should be 6!"});
+    required(schema.password, {message: "Password is required"});
+    required(schema.address, {message: "Address is required!"});
+  });
 
   onSubmit(e: Event) {
     e.preventDefault();
